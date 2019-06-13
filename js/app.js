@@ -4,7 +4,7 @@
 FETCH FUNCTIONS
 -------------------------*/
 
-fetch('https://randomuser.me/api/1.2/?results=12')
+fetch('https://randomuser.me/api/1.2/?nat=gb&results=12')
   .then(checkStatus)
   .then(res => res.json())
   .then(data => console.log(data))
