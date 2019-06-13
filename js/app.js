@@ -9,7 +9,10 @@ FETCH FUNCTIONS
 fetch('https://randomuser.me/api/1.2/?nat=gb&results=12')
   .then(checkStatus)
   .then(res => res.json())
-  .then(data => console.log(data.results))
+  .then(data => {
+    console.log(data.results);
+    displayEmployees(data.results);
+  })
   .catch(err => console.log(err));
 
 
@@ -31,14 +34,14 @@ function checkStatus(response) {
  */
 function displayEmployees(employees) {
   let html = employees.map(employee => `
-    <div>class="card">
+    <divclass="card">
       <div class="card-img-container">
         <img class="card-img" src="${employee.picture.thumbnail}" alt="profile picture">
       </div>
       <div class="card-info-container">
         <h3 id="name" class="card-name cap">${employee.name.first} ${employee.name.last}</h3> 
         <p class="card-text">${employee.email}</p>
-        <p class="card-text cap">${employee.location.city} ${employee.location.state}</p>
+        <p class="card-text cap">${employee.location.city}, ${employee.nat}</p>
       </div>
     </div>
   `).join('');
