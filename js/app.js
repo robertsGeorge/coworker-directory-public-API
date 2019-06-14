@@ -34,7 +34,7 @@ function checkStatus(response) {
  */
 function displayEmployees(employees) {
   let html = employees.map(employee => `
-    <divclass="card">
+    <div class="card">
       <div class="card-img-container">
         <img class="card-img" src="${employee.picture.large}" alt="profile picture">
       </div>
