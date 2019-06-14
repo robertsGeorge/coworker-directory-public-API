@@ -81,7 +81,8 @@ function displayModal(employee) {
     </div>
   `;
   modalContainer.innerHTML = html;
-  body.appendChild(modalContainer);
+  // body.appendChild(modalContainer);
+  gallery.insertAdjacentElement('afterend', modalContainer);
 }
 
 
