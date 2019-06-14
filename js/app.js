@@ -35,8 +35,6 @@ function checkStatus(response) {
   }
 }
 
-
-
 /**
  * Generates HTML to display employee data from API as cards
  * @param {Array} employees   An array of random employee objects.
@@ -58,7 +56,10 @@ function displayEmployees(employees) {
   gallery.innerHTML = html;
 }
 
-// accepts an employee object
+/**
+ * Displays a modal window with more details on the employee clicked on by user
+ * @param {employee} employee An object containing the employees data.
+ */
 function displayModal(employee) {
   const modalContainer = document.createElement('div');
   modalContainer.className = 'modal-container';
