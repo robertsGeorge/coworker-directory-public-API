@@ -36,7 +36,7 @@ function displayEmployees(employees) {
   let html = employees.map(employee => `
     <divclass="card">
       <div class="card-img-container">
-        <img class="card-img" src="${employee.picture.thumbnail}" alt="profile picture">
+        <img class="card-img" src="${employee.picture.large}" alt="profile picture">
       </div>
       <div class="card-info-container">
         <h3 id="name" class="card-name cap">${employee.name.first} ${employee.name.last}</h3> 
