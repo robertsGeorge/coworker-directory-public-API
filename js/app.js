@@ -13,8 +13,8 @@ fetch('https://randomuser.me/api/1.2/?nat=gb&results=12')
     console.log(data);
     displayEmployees(data.results);
     coworkers = data.results;
+    displayModal(coworkers[0]); // test displayModal.
   })
-  .then( () => displayModal(coworkers[0]) ) // test displayModal.
   .catch(err => console.log(err));
 
 
