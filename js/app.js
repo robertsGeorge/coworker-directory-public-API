@@ -10,7 +10,7 @@ fetch('https://randomuser.me/api/1.2/?nat=gb&results=12')
   .then(checkStatus)
   .then(res => res.json())
   .then(data => {
-    console.log(data.results);
+    console.log(data);
     displayEmployees(data.results);
   })
   .catch(err => console.log(err));
@@ -46,7 +46,7 @@ function displayEmployees(employees) {
         <img class="card-img" src="${employee.picture.large}" alt="profile picture">
       </div>
       <div class="card-info-container">
-        <h3 id="name" class="card-name cap">${employee.name.first} ${employee.name.last}</h3> 
+        <h3 id="${employee.name.first}-${employee.name.last}" class="card-name cap">${employee.name.first} ${employee.name.last}</h3> 
         <p class="card-text">${employee.email}</p>
         <p class="card-text cap">${employee.location.city}, ${employee.nat}</p>
       </div>
@@ -55,4 +55,8 @@ function displayEmployees(employees) {
   
   gallery.innerHTML = html;
 }
+
+/* -----------------------------------------------------
+Event listeners
+--------------------------------------------------------*/
 
