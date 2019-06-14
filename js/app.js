@@ -41,12 +41,12 @@ function checkStatus(response) {
  */
 function displayEmployees(employees) {
   let html = employees.map(employee => `
-    <div class="card">
+    <div class="card" id="${employee.name.first}-${employee.name.last}">
       <div class="card-img-container">
         <img class="card-img" src="${employee.picture.large}" alt="profile picture">
       </div>
       <div class="card-info-container">
-        <h3 id="${employee.name.first}-${employee.name.last}" class="card-name cap">${employee.name.first} ${employee.name.last}</h3> 
+        <h3 id="name" class="card-name cap">${employee.name.first} ${employee.name.last}</h3> 
         <p class="card-text">${employee.email}</p>
         <p class="card-text cap">${employee.location.city}, ${employee.nat}</p>
       </div>
@@ -60,3 +60,4 @@ function displayEmployees(employees) {
 Event listeners
 --------------------------------------------------------*/
 
+gallery.addEventListener
