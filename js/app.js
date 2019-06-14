@@ -20,6 +20,11 @@ fetch('https://randomuser.me/api/1.2/?nat=gb&results=12')
   HELPER FUNCTIONS
 ----------------------------------*/ 
 
+/**
+ * Checks the http response status of a fetch request
+ * @param {object} response A response object (a promise).
+ * @returns {object}        A settled response object (a promise - either fulfilled or rejected.
+ */
 function checkStatus(response) {
   if (response.ok) {
     return Promise.resolve(response);
@@ -27,6 +32,8 @@ function checkStatus(response) {
     return Promise.reject(new Error(response.statusText));
   }
 }
+
+
 
 /**
  * Generates HTML to display employee data from API as cards
@@ -47,6 +54,5 @@ function displayEmployees(employees) {
   `).join('');
   
   gallery.innerHTML = html;
-  
-
 }
+
