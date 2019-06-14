@@ -1,7 +1,7 @@
 "use strict";
 const body = document.querySelector('body');
 const gallery = document.querySelector('#gallery');
-
+let coworkers = [];
 /* ------------------------
 FETCH FUNCTIONS
 -------------------------*/
@@ -12,7 +12,9 @@ fetch('https://randomuser.me/api/1.2/?nat=gb&results=12')
   .then(data => {
     console.log(data);
     displayEmployees(data.results);
+    coworkers = data.results;
   })
+  .then( () => displayModal(coworkers[0]) ) // test displayModal.
   .catch(err => console.log(err));
 
 
@@ -58,6 +60,8 @@ function displayEmployees(employees) {
 
 // accepts an employee object
 function displayModal(employee) {
+  const modalContainer = document.createElement('div');
+  modalContainer.className = 'modal-container';
   let html = `
     <div class="modal-container">
       <div class="modal">
@@ -75,8 +79,12 @@ function displayModal(employee) {
       </div>
     </div>
   `;
-  body.appendChild(html)
+  modalContainer.innerHTML = html;
+  body.appendChild(modalContainer);
 }
+
+
+
 
 
 /* -----------------------------------------------------
