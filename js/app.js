@@ -63,7 +63,10 @@ function displayEmployees(employees) {
   gallery.innerHTML = html;
 }
 
-
+/**
+ * Handles the data for, display and removal of employee details modal window
+ * @param {object} event  - The event object triggered by clicking on an employee
+ */
 const handleModal = event => {
   for (let worker of coworkers) {
     // event.currentTarget.id is div with class of card and id as email address.
