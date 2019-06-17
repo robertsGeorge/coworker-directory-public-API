@@ -108,7 +108,6 @@ fetch('https://randomuser.me/api/1.2/?nat=gb&results=12')
   .then(checkStatus)
   .then(res => res.json())
   .then(data => {
-    console.log(data);
     displayEmployees(data.results);
     coworkers = data.results;
     cards = document.querySelectorAll('.card');
