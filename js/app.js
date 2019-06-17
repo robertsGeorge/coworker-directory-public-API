@@ -5,24 +5,7 @@ let coworkers = [];
 let cards = [];
 
 
-/* ------------------------
-FETCH FUNCTIONS
--------------------------*/
 
-fetch('https://randomuser.me/api/1.2/?nat=gb&results=12')
-  .then(checkStatus)
-  .then(res => res.json())
-  .then(data => {
-    console.log(data);
-    displayEmployees(data.results);
-    coworkers = data.results;
-    cards = document.querySelectorAll('.card');
-
-    cards.forEach(card => {
-      card.addEventListener('click', handleModal);
-    });
-  })
-  .catch(err => console.log(err));
 
 
 /*---------------------------------
@@ -34,7 +17,7 @@ fetch('https://randomuser.me/api/1.2/?nat=gb&results=12')
  * @param {object} response A response object (a promise).
  * @returns {object}        A settled response object (a promise - either fulfilled or rejected.
  */
-function checkStatus(response) {
+const checkStatus = response => {
   if (response.ok) {
     return Promise.resolve(response);
   } else {
@@ -46,7 +29,7 @@ function checkStatus(response) {
  * Generates HTML to display employee data from API as cards
  * @param {Array} employees   An array of random employee objects.
  */
-function displayEmployees(employees) {
+const displayEmployees = employees => {
   let html = employees.map(employee => `
     <div class="card"  id="${employee.email}">
       <div class="card-img-container">
@@ -63,30 +46,12 @@ function displayEmployees(employees) {
   gallery.innerHTML = html;
 }
 
-/**
- * Handles the data for, display and removal of employee details modal window
- * @param {object} event  - The event object triggered by clicking on an employee
- */
-const handleModal = event => {
-  for (let worker of coworkers) {
-    // event.currentTarget.id is div with class of card and id as email address.
-    if (worker.email === event.currentTarget.id) {
-      displayModal(worker);
-      // remove modal window from view and the DOM:
-      document.querySelector('#modal-close-btn').addEventListener('click', () => {
-        document.querySelector('.modal-container').remove();
-      });
-      break;
-    }
-  }
-};
-
 
 /**
  * Displays a modal window with more details on the employee clicked on by user
  * @param {employee} employee An object containing the employees data.
  */
-function displayModal(employee) {
+const displayModal = employee => {
   const modalContainer = document.createElement('div');
   modalContainer.className = 'modal-container';
   let html = `
@@ -111,12 +76,51 @@ function displayModal(employee) {
 }
 
 
+/**
+ * Handles the data for, display and removal of employee details modal window
+ * @param {object} event  - The event object triggered by clicking on an employee
+ */
+const handleModal = event => {
+  
+  // Within the coworkers array of worker objects, Identify the worker that was clicked
+  for (let worker of coworkers) {
+    // event.currentTarget identifies the element that the event listener was registered on (div.card).
+    // employee email is used to assign an id attribute in displayEmployees() above.
+    if (worker.email === event.currentTarget.id) {
+      displayModal(worker);
+
+      // remove modal window from view and the DOM:
+      document.querySelector('#modal-close-btn').addEventListener('click', () => {
+        document.querySelector('.modal-container').remove();
+      });
+      break;
+    }
+  }
+};
 
 
 
-/* -----------------------------------------------------
-Event listeners
---------------------------------------------------------*/
+/* --------------------------------------------
+FETCH FUNCTION / APP LOGIC
+-----------------------------------------------*/
+
+fetch('https://randomuser.me/api/1.2/?nat=gb&results=12')
+  .then(checkStatus)
+  .then(res => res.json())
+  .then(data => {
+    console.log(data);
+    displayEmployees(data.results);
+    coworkers = data.results;
+    cards = document.querySelectorAll('.card');
+
+    cards.forEach(card => {
+      card.addEventListener('click', handleModal);
+    });
+  })
+  .catch(err => console.log(err));
+
+
+
 
 
 
