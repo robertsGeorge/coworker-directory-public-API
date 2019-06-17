@@ -3,6 +3,8 @@ const body = document.querySelector('body');
 const gallery = document.querySelector('#gallery');
 let coworkers = [];
 let cards = [];
+
+
 /* ------------------------
 FETCH FUNCTIONS
 -------------------------*/
@@ -17,19 +19,7 @@ fetch('https://randomuser.me/api/1.2/?nat=gb&results=12')
     cards = document.querySelectorAll('.card');
 
     cards.forEach(card => {
-      card.addEventListener('click', event => {
-        for (let worker of coworkers) {
-          // event.currentTarget.id is div with class of card and id as email address.
-          if (worker.email === event.currentTarget.id) {
-            displayModal(worker);
-            // remove modal window from view and the DOM:
-            document.querySelector('#modal-close-btn').addEventListener('click', () => {
-              document.querySelector('.modal-container').remove();
-            })
-            break;
-          }
-        }
-      });
+      card.addEventListener('click', handleModal);
     });
   })
   .catch(err => console.log(err));
@@ -72,6 +62,22 @@ function displayEmployees(employees) {
   
   gallery.innerHTML = html;
 }
+
+
+const handleModal = event => {
+  for (let worker of coworkers) {
+    // event.currentTarget.id is div with class of card and id as email address.
+    if (worker.email === event.currentTarget.id) {
+      displayModal(worker);
+      // remove modal window from view and the DOM:
+      document.querySelector('#modal-close-btn').addEventListener('click', () => {
+        document.querySelector('.modal-container').remove();
+      });
+      break;
+    }
+  }
+};
+
 
 /**
  * Displays a modal window with more details on the employee clicked on by user
