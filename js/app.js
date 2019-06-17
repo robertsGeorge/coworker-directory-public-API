@@ -20,16 +20,16 @@ fetch('https://randomuser.me/api/1.2/?nat=gb&results=12')
       card.addEventListener('click', event => {
         for (let worker of coworkers) {
           // event.currentTarget.id is div with class of card and id as email address.
-          // debugger;
           if (worker.email === event.currentTarget.id) {
             displayModal(worker);
+            document.querySelector('#modal-close-btn').addEventListener('click', () => {
+              document.querySelector('.modal-container').remove();
+            })
             break;
           }
         }
       });
     });
-
-    // displayModal(coworkers[0]); // test displayModal.
   })
   .catch(err => console.log(err));
 
