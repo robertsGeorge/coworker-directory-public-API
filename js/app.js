@@ -2,6 +2,7 @@
 const body = document.querySelector('body');
 const gallery = document.querySelector('#gallery');
 let coworkers = [];
+let cards = [];
 /* ------------------------
 FETCH FUNCTIONS
 -------------------------*/
@@ -13,7 +14,22 @@ fetch('https://randomuser.me/api/1.2/?nat=gb&results=12')
     console.log(data);
     displayEmployees(data.results);
     coworkers = data.results;
-    displayModal(coworkers[0]); // test displayModal.
+    cards = document.querySelectorAll('.card');
+
+    cards.forEach(card => {
+      card.addEventListener('click', event => {
+        for (let worker of coworkers) {
+          // event.currentTarget.id is div with class of card and id as email address.
+          // debugger;
+          if (worker.email === event.currentTarget.id) {
+            displayModal(worker);
+            break;
+          }
+        }
+      });
+    });
+
+    // displayModal(coworkers[0]); // test displayModal.
   })
   .catch(err => console.log(err));
 
@@ -41,7 +57,7 @@ function checkStatus(response) {
  */
 function displayEmployees(employees) {
   let html = employees.map(employee => `
-    <div class="card" id="${employee.name.first}-${employee.name.last}">
+    <div class="card"  id="${employee.email}">
       <div class="card-img-container">
         <img class="card-img" src="${employee.picture.large}" alt="profile picture">
       </div>
@@ -81,7 +97,6 @@ function displayModal(employee) {
     </div>
   `;
   modalContainer.innerHTML = html;
-  // body.appendChild(modalContainer);
   gallery.insertAdjacentElement('afterend', modalContainer);
 }
 
@@ -93,6 +108,5 @@ function displayModal(employee) {
 Event listeners
 --------------------------------------------------------*/
 
-gallery.addEventListener('click', (event) => {
 
-});
+
