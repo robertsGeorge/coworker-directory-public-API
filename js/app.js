@@ -22,6 +22,7 @@ fetch('https://randomuser.me/api/1.2/?nat=gb&results=12')
           // event.currentTarget.id is div with class of card and id as email address.
           if (worker.email === event.currentTarget.id) {
             displayModal(worker);
+            // remove modal window from view and the DOM:
             document.querySelector('#modal-close-btn').addEventListener('click', () => {
               document.querySelector('.modal-container').remove();
             })
