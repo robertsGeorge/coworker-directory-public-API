@@ -53,14 +53,12 @@ const displayEmployees = employees => {
  * @param {object} event  - The event object triggered by clicking on an employee
  */
 const handleModal = event => {
-  
   // Within the coworkers array of worker objects, Identify the worker that was clicked
   for (let worker of coworkers) {
     // event.currentTarget identifies the element that the event listener was registered on (div.card).
     // employee email is used to assign an id attribute in displayEmployees() above.
     if (worker.email === event.currentTarget.id) {
       displayModal(worker);
-
       // remove modal window from view and the DOM:
       document.querySelector('#modal-close-btn').addEventListener('click', () => {
         document.querySelector('.modal-container').remove();
@@ -115,7 +113,6 @@ fetch('https://randomuser.me/api/1.2/?nat=gb&results=12')
     displayEmployees(data.results);
     coworkers = data.results;
     cards = document.querySelectorAll('.card');
-
     cards.forEach(card => {
       card.addEventListener('click', handleModal);
     });
