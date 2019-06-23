@@ -47,6 +47,32 @@ const displayEmployees = employees => {
 }
 
 
+
+/**
+ * Handles the data for, display and removal of employee details modal window
+ * @param {object} event  - The event object triggered by clicking on an employee
+ */
+const handleModal = event => {
+  
+  // Within the coworkers array of worker objects, Identify the worker that was clicked
+  for (let worker of coworkers) {
+    // event.currentTarget identifies the element that the event listener was registered on (div.card).
+    // employee email is used to assign an id attribute in displayEmployees() above.
+    if (worker.email === event.currentTarget.id) {
+      displayModal(worker);
+
+      // remove modal window from view and the DOM:
+      document.querySelector('#modal-close-btn').addEventListener('click', () => {
+        document.querySelector('.modal-container').remove();
+      });
+      break;
+    }
+  }
+};
+
+
+
+
 /**
  * Displays a modal window with more details on the employee clicked on by user
  * @param {employee} employee An object containing the employees data.
@@ -75,28 +101,6 @@ const displayModal = employee => {
   gallery.insertAdjacentElement('afterend', modalContainer);
 }
 
-
-/**
- * Handles the data for, display and removal of employee details modal window
- * @param {object} event  - The event object triggered by clicking on an employee
- */
-const handleModal = event => {
-  
-  // Within the coworkers array of worker objects, Identify the worker that was clicked
-  for (let worker of coworkers) {
-    // event.currentTarget identifies the element that the event listener was registered on (div.card).
-    // employee email is used to assign an id attribute in displayEmployees() above.
-    if (worker.email === event.currentTarget.id) {
-      displayModal(worker);
-
-      // remove modal window from view and the DOM:
-      document.querySelector('#modal-close-btn').addEventListener('click', () => {
-        document.querySelector('.modal-container').remove();
-      });
-      break;
-    }
-  }
-};
 
 
 
